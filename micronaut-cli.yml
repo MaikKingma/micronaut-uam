@@ -1,0 +1,6 @@
+applicationType: default
+defaultPackage: com.mte.uam
+testFramework: junit
+sourceLanguage: java
+buildTool: gradle
+features: [annotation-api, app-name, assertj, camunda-platform7, data, data-jdbc, graalvm, gradle, http-client, jackson-databind, java, java-application, jax-rs, jdbc-hikari, junit, logback, lombok, micronaut-aot, micronaut-build, mockito, netty-server, postgres, readme, shade, test-resources, yaml]
