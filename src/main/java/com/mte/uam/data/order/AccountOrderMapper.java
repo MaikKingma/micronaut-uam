@@ -1,17 +1,17 @@
 package com.mte.uam.data.order;
 
 import com.mte.uam.domain.order.AccountOrder;
+import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
 
 /**
  * @author Maik Kingma
  */
 
-public class AccountOrderMapper {
-    public static AccountOrderEntity mapToEntity(AccountOrder order) {
-        return AccountOrderEntity.builder()
-                .username(order.getUsername())
-                .firstName(order.getFirstName())
-                .lastName(order.getLastName())
-                .build();
-    }
+@Mapper
+public interface AccountOrderMapper {
+
+    AccountOrderMapper INSTANCE = Mappers.getMapper(AccountOrderMapper.class);
+
+    AccountOrderEntity accountOrderToAccountOrderEntity(AccountOrder accountOrder);
 }

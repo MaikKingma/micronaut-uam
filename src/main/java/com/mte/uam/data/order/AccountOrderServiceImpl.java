@@ -19,6 +19,6 @@ public class AccountOrderServiceImpl implements AccountOrderService {
 
     @Override
     public void register(AccountOrder order) {
-        accountOrderRepository.save(AccountOrderMapper.mapToEntity(order));
+        accountOrderRepository.save(AccountOrderMapper.INSTANCE.accountOrderToAccountOrderEntity(order));
     }
 }
