@@ -1,3 +1,4 @@
+
 plugins {
     id("com.github.johnrengelman.shadow") version "7.1.2"
     id("io.micronaut.application") version "3.6.2"
@@ -8,12 +9,17 @@ plugins {
 version = "0.1"
 group = "com.mte.uam"
 
+ext {
+    lombokVersion = "1.18.24"
+    postgresVersion= '42.5.0'
+}
+
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    annotationProcessor("org.projectlombok:lombok")
+    annotationProcessor("org.projectlombok:lombok:$lombokVersion")
     annotationProcessor("io.micronaut.data:micronaut-data-processor")
     annotationProcessor("io.micronaut:micronaut-http-validation")
     annotationProcessor("io.micronaut.jaxrs:micronaut-jaxrs-processor")
@@ -28,11 +34,11 @@ dependencies {
     implementation("io.micronaut:micronaut-validation")
     implementation("io.micronaut.flyway:micronaut-flyway")
 
-    compileOnly("org.projectlombok:lombok")
+    compileOnly("org.projectlombok:lombok:$lombokVersion")
     compileOnly("org.graalvm.nativeimage:svm")
 
 
-    runtimeOnly("org.flywaydb:flyway-postgresql")
+    runtimeOnly "org.postgresql:postgresql:$postgresVersion"
     runtimeOnly("ch.qos.logback:logback-classic")
     runtimeOnly("org.postgresql:postgresql")
 
