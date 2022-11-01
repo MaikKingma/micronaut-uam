@@ -6,4 +6,7 @@ package com.mte.uam.domain.order;
 
 public interface AccountOrderService {
     void register(AccountOrder order);
+
+    void finalize(String username);
+
 }

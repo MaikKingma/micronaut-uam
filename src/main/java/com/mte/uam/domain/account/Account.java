@@ -1,15 +1,15 @@
-package com.mte.uam.domain.order;
+package com.mte.uam.domain.account;
 
 import lombok.*;
 
 /**
- * @author Maik Kingma
+ * @author Jan Boonen
  */
 
 @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @EqualsAndHashCode
-public class AccountOrder {
+public class Account {
 
     @Getter
     private String firstName;
@@ -20,7 +20,7 @@ public class AccountOrder {
     @Getter
     private String username;
 
-    public static AccountOrder create(String firstName, String lastName, String username) {
-        return new AccountOrder(firstName, lastName, username);
+    public static Account create(String firstName, String lastName, String username) {
+        return new Account(firstName, lastName, username);
     }
 }

@@ -6,10 +6,7 @@ import io.micronaut.core.annotation.Introspected;
 import io.micronaut.core.annotation.ReflectiveAccess;
 import io.micronaut.http.HttpStatus;
 import io.micronaut.http.MediaType;
-import io.micronaut.http.annotation.Body;
-import io.micronaut.http.annotation.Controller;
-import io.micronaut.http.annotation.Post;
-import io.micronaut.http.annotation.Status;
+import io.micronaut.http.annotation.*;
 import io.micronaut.scheduling.TaskExecutors;
 import io.micronaut.scheduling.annotation.ExecuteOn;
 import lombok.extern.slf4j.Slf4j;
@@ -21,11 +18,11 @@ import javax.validation.constraints.NotBlank;
  */
 @Slf4j
 @Controller("/accounts")
-public class AccountCommands {
+public class AccountOrderCommands {
 
     private final AccountOrderService accountOrderService;
 
-    public AccountCommands(AccountOrderService accountOrderService) {
+    public AccountOrderCommands(AccountOrderService accountOrderService) {
         this.accountOrderService = accountOrderService;
     }
 
