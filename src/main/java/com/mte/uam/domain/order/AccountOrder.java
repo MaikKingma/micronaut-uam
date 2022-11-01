@@ -1,11 +1,7 @@
 package com.mte.uam.domain.order;
 
+import lombok.*;
 import com.mte.uam.domain.account.Account;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
 
 /**
  * @author Maik Kingma

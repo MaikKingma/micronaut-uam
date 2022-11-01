@@ -26,4 +26,21 @@ class AccountOrderMapperTest {
         assertEquals(accountOrderEntity.getUsername(), accountOrder.getUsername());
 
     }
+
+    @Test
+    void shouldMapAccountOrderEntityToAccountOrder() {
+        AccountOrderEntity accountOrderEntity = AccountOrderEntity.builder()
+                .username("TestUsername")
+                .lastName("TestLastname")
+                .firstName("TestFirstname")
+                .build();
+
+        AccountOrder accountOrder = AccountOrderMapper.INSTANCE.accountOrderEntityToAccountOrder(accountOrderEntity);
+
+        assertNotNull(accountOrder);
+        assertEquals(accountOrder.getFirstName(), accountOrderEntity.getFirstName());
+        assertEquals(accountOrder.getLastName(), accountOrderEntity.getLastName());
+        assertEquals(accountOrder.getUsername(), accountOrderEntity.getUsername());
+
+    }
 }
