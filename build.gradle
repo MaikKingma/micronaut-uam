@@ -24,7 +24,7 @@ dependencies {
     annotationProcessor("io.micronaut:micronaut-http-validation")
     annotationProcessor("io.micronaut.jaxrs:micronaut-jaxrs-processor")
 
-    implementation("info.novatec:micronaut-camunda-bpm-feature:2.10.0")
+//    implementation("info.novatec:micronaut-camunda-bpm-feature:2.10.0")
     implementation("io.micronaut:micronaut-http-client")
     implementation("io.micronaut:micronaut-jackson-databind")
     implementation("io.micronaut.data:micronaut-data-jdbc")
@@ -45,7 +45,7 @@ dependencies {
     testAnnotationProcessor("io.micronaut.jaxrs:micronaut-jaxrs-processor")
 
     testImplementation("org.assertj:assertj-core")
-    testImplementation("org.camunda.bpm:camunda-bpm-assert:7.17.0")
+//    testImplementation("org.camunda.bpm:camunda-bpm-assert:7.17.0")
     testImplementation("org.mockito:mockito-core")
 
 }

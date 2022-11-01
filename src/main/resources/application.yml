@@ -17,3 +17,7 @@ flyway:
   datasources:
     default:
       enabled: true
+
+mockito:
+  test:
+    enabled: true
