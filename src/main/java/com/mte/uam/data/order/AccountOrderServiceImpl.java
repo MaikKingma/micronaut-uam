@@ -4,8 +4,6 @@ import com.mte.uam.domain.order.AccountOrder;
 import com.mte.uam.domain.order.AccountOrderService;
 import jakarta.inject.Singleton;
 
-import java.util.Optional;
-
 /**
  * @author Maik Kingma
  */
@@ -19,16 +17,19 @@ public class AccountOrderServiceImpl implements AccountOrderService {
         this.accountOrderRepository = accountOrderRepository;
     }
 
-    @Override
-    public void register(AccountOrder order) {
+    public void save(AccountOrder order) {
         accountOrderRepository.save(AccountOrderMapper.INSTANCE.accountOrderToAccountOrderEntity(order));
     }
 
     @Override
-    public void finalize(String username) {
-        accountOrderRepository.findById(username).ifPresent(
-                accountOrderEntity -> accountOrderRepository.update(accountOrderEntity.setFinalized())
-        );
+    public AccountOrder findById(String username) {
+        return AccountOrderMapper.INSTANCE.accountOrderEntityToAccountOrder(
+                accountOrderRepository.findById(username)
+                        .orElseThrow(() -> new AccountOrderNotFoundException("order not found")));
     }
 
+    @Override
+    public void update(AccountOrder accountOrder) {
+        accountOrderRepository.update(AccountOrderMapper.INSTANCE.accountOrderToAccountOrderEntity(accountOrder));
+    }
 }

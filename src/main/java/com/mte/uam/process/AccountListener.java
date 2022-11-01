@@ -5,24 +5,29 @@ import com.mte.uam.domain.order.AccountOrderService;
 import io.micronaut.context.annotation.Factory;
 import io.micronaut.data.event.listeners.PostPersistEventListener;
 import jakarta.inject.Singleton;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @author Jan Boonen
+ * @author Jan Boonen & Maik Kingma
  */
 @Slf4j
 @Factory
-@AllArgsConstructor
 public class AccountListener {
 
-    private AccountOrderService accountOrderService;
+    private final AccountOrderService accountOrderService;
+
+    public AccountListener(AccountOrderService accountOrderService) {
+        this.accountOrderService = accountOrderService;
+    }
 
     @Singleton
     PostPersistEventListener<AccountEntity> afterAccountPersist() {
-        return (account) -> {
-            accountOrderService.finalize(account.getUsername());
-            log.info("Account finalized: {}", account.getUsername());
+        return (accountEntity) -> {
+            var accountOrder = accountOrderService.findById(accountEntity.getUsername());
+            if (!accountOrder.isFinalized()) {
+                accountOrder.finishOrder();
+                accountOrderService.update(accountOrder);
+            }
         };
     }
 }

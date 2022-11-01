@@ -6,5 +6,3 @@ CREATE TABLE account
     firstname VARCHAR(255) NOT NULL,
     lastname  VARCHAR(255) NOT NULL
 );
-
-ALTER TABLE account_order ADD COLUMN finalized BOOLEAN DEFAULT FALSE;

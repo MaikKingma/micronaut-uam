@@ -3,7 +3,10 @@ package com.mte.uam.data.order;
 import io.micronaut.data.annotation.Id;
 import io.micronaut.data.annotation.MappedEntity;
 import io.micronaut.data.annotation.MappedProperty;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author Maik Kingma
@@ -24,12 +27,5 @@ public class AccountOrderEntity {
     @MappedProperty(value = "lastname")
     private String lastName;
 
-    @MappedProperty(value = "finalized")
     private boolean finalized;
-
-    AccountOrderEntity setFinalized() {
-        finalized = true;
-        return this;
-    }
-
 }

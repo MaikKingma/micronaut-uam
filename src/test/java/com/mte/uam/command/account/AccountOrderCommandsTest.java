@@ -42,7 +42,7 @@ class AccountOrderCommandsTest {
                 "username", "first", "last")));
 
         assertEquals(response.getStatus(), HttpStatus.ACCEPTED);
-        verify(accountOrderService, times(1)).register(any(AccountOrder.class));
+        verify(accountOrderService, times(1)).save(any(AccountOrder.class));
 
     }
 

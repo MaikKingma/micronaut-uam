@@ -1,7 +1,6 @@
 package com.mte.uam.data.account;
 
 import com.mte.uam.domain.account.Account;
-import com.mte.uam.domain.order.AccountOrder;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -9,15 +8,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class AccountMapperTest {
 
     @Test
-    void shouldMapAccountOrderToAccountEntity() {
-        var accountOrder = AccountOrder.builder()
+    void shouldMapAccountToAccountEntity() {
+        var accountOrder = Account.builder()
                 .username("test")
                 .firstName("First Name")
                 .lastName("Last Name")
                 .build();
 
-        var result = AccountMapper.INSTANCE.accountOrderToAccountEntity(accountOrder);
-        assertThat(result).isEqualTo(AccountEntity.builder().username("test")
+        var result = AccountMapper.INSTANCE.accountToAccountEntity(accountOrder);
+        assertThat(result).isEqualTo(AccountEntity.builder()
+                .username("test")
                 .firstName("First Name")
                 .lastName("Last Name")
                 .build());

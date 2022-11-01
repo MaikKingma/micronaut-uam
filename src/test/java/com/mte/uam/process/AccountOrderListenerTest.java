@@ -4,7 +4,6 @@ import com.mte.uam.data.order.AccountOrderEntity;
 import com.mte.uam.data.order.AccountOrderRepository;
 import com.mte.uam.domain.account.Account;
 import com.mte.uam.domain.account.AccountService;
-import com.mte.uam.domain.order.AccountOrder;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.test.annotation.MockBean;
@@ -13,7 +12,8 @@ import jakarta.inject.Inject;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 @MicronautTest
 @Requires(property = "mockito.test.enabled", defaultValue = StringUtils.FALSE, value = StringUtils.TRUE)
@@ -30,7 +30,6 @@ class AccountOrderListenerTest {
 
     @Test
     void shouldReturnAccountAfterAccountOrderPersist() {
-        when(accountService.create(any(AccountOrder.class))).thenReturn(Account.create("First Name", "Last Name", "test"));
         var accountOrderEntity = AccountOrderEntity.builder()
                 .username("test")
                 .firstName("First Name")
@@ -38,9 +37,9 @@ class AccountOrderListenerTest {
                 .build();
         accountOrderRepository.save(accountOrderEntity);
 
-        var accountOrder = AccountOrder.create("First Name", "Last Name", "test");
+        var account = Account.create("First Name", "Last Name", "test");
 
-        verify(accountService).create(accountOrder);
+        verify(accountService).create(account);
     }
 
     @MockBean(AccountService.class)

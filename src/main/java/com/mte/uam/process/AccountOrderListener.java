@@ -6,7 +6,6 @@ import com.mte.uam.domain.account.AccountService;
 import io.micronaut.context.annotation.Factory;
 import io.micronaut.data.event.listeners.PostPersistEventListener;
 import jakarta.inject.Singleton;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -15,16 +14,23 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Factory
-@AllArgsConstructor
 public class AccountOrderListener {
 
-    private AccountService accountService;
+    private final AccountService accountService;
+
+    public AccountOrderListener(AccountService accountService) {
+        this.accountService = accountService;
+    }
 
     @Singleton
     PostPersistEventListener<AccountOrderEntity> afterAccountOrderPersist() {
         return (accountOrderEntity) -> {
-            accountService.create(AccountOrderMapper.INSTANCE.accountOrderEntityToAccountOrder(accountOrderEntity));
-            log.info("AccountOrder persisted: {}", accountOrderEntity.getUsername());
+            if (!accountOrderEntity.isFinalized()) {
+                log.info("AccountOrder persisted: {}", accountOrderEntity.getUsername());
+                var accountOrder = AccountOrderMapper.INSTANCE.accountOrderEntityToAccountOrder(accountOrderEntity);
+                var account = accountOrder.convertToAccount();
+                accountService.create(account);
+            }
         };
     }
 }
