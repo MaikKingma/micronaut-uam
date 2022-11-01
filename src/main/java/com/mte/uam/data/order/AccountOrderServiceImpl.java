@@ -2,11 +2,8 @@ package com.mte.uam.data.order;
 
 import com.mte.uam.domain.order.AccountOrder;
 import com.mte.uam.domain.order.AccountOrderService;
-import io.micronaut.http.HttpStatus;
-import io.micronaut.http.exceptions.HttpStatusException;
 import jakarta.inject.Singleton;
 
-import javax.transaction.Transactional;
 import java.util.Optional;
 
 /**
@@ -29,10 +26,9 @@ public class AccountOrderServiceImpl implements AccountOrderService {
 
     @Override
     public void finalize(String username) {
-        Optional<AccountOrderEntity> accountOrder = accountOrderRepository.findById(username);
-        if(accountOrder.isPresent()){
-            accountOrderRepository.update(accountOrder.get().setFinalized());
-        }
+        accountOrderRepository.findById(username).ifPresent(
+                accountOrderEntity -> accountOrderRepository.update(accountOrderEntity.setFinalized())
+        );
     }
 
 }

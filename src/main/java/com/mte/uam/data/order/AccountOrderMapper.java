@@ -3,7 +3,6 @@ package com.mte.uam.data.order;
 import com.mte.uam.domain.order.AccountOrder;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 
 /**

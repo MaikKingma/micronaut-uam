@@ -1,8 +1,6 @@
 package com.mte.uam.process;
 
 import com.mte.uam.data.account.AccountEntity;
-import com.mte.uam.data.order.AccountOrderEntity;
-import com.mte.uam.data.order.AccountOrderMapper;
 import com.mte.uam.domain.order.AccountOrderService;
 import io.micronaut.context.annotation.Factory;
 import io.micronaut.data.event.listeners.PostPersistEventListener;

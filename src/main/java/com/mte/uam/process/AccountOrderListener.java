@@ -23,7 +23,7 @@ public class AccountOrderListener {
     @Singleton
     PostPersistEventListener<AccountOrderEntity> afterAccountOrderPersist() {
         return (accountOrderEntity) -> {
-            var account = accountService.create(AccountOrderMapper.INSTANCE.accountOrderEntityToAccountOrder(accountOrderEntity));
+            accountService.create(AccountOrderMapper.INSTANCE.accountOrderEntityToAccountOrder(accountOrderEntity));
             log.info("AccountOrder persisted: {}", accountOrderEntity.getUsername());
         };
     }
