@@ -17,23 +17,30 @@ dependencies {
     annotationProcessor("io.micronaut.data:micronaut-data-processor")
     annotationProcessor("io.micronaut:micronaut-http-validation")
     annotationProcessor("io.micronaut.jaxrs:micronaut-jaxrs-processor")
-    implementation("info.novatec:micronaut-camunda-bpm-feature:2.9.0")
+
+    implementation("info.novatec:micronaut-camunda-bpm-feature:2.10.0")
     implementation("io.micronaut:micronaut-http-client")
     implementation("io.micronaut:micronaut-jackson-databind")
     implementation("io.micronaut.data:micronaut-data-jdbc")
     implementation("io.micronaut.jaxrs:micronaut-jaxrs-server")
     implementation("io.micronaut.sql:micronaut-jdbc-hikari")
     implementation("jakarta.annotation:jakarta.annotation-api")
+    implementation("io.micronaut:micronaut-validation")
+    implementation("io.micronaut.flyway:micronaut-flyway")
+
     compileOnly("org.projectlombok:lombok")
+    compileOnly("org.graalvm.nativeimage:svm")
+
+
+    runtimeOnly("org.flywaydb:flyway-postgresql")
     runtimeOnly("ch.qos.logback:logback-classic")
     runtimeOnly("org.postgresql:postgresql")
+
     testAnnotationProcessor("io.micronaut.jaxrs:micronaut-jaxrs-processor")
+
     testImplementation("org.assertj:assertj-core")
     testImplementation("org.camunda.bpm:camunda-bpm-assert:7.17.0")
     testImplementation("org.mockito:mockito-core")
-    compileOnly("org.graalvm.nativeimage:svm")
-
-    implementation("io.micronaut:micronaut-validation")
 
 }
 

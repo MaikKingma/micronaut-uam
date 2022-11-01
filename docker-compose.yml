@@ -1,0 +1,38 @@
+version: '3.1'
+
+# ATTENTION: at the moment there are no health checks introduced, so you will need to run the containers separately and check they are up before starting the following
+#
+# First run mvn clean verify docker:build from your command line in the ./keycloak dir.
+#
+# startup order:
+#     1: postgres-db
+#     2: keycloak-server-custom
+#     3: keycloak-java-configuration
+#
+
+services:
+  postgres-db:
+    image: postgres:14.4
+    restart: always
+    environment:
+      POSTGRES_USER: micronaut-uam
+      POSTGRES_PASSWORD: micronaut-uam
+      POSTGRES_DB: micronaut-uam
+    ports:
+      - "5432:5432"
+    networks:
+      vpcmicronautuam:
+        ipv4_address: 172.20.0.2
+
+networks:
+  vpcmicronautuam:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+          gateway: 172.20.0.1
+
+
+
+
+
