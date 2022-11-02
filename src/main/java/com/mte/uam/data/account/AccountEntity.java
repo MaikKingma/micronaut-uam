@@ -5,6 +5,8 @@ import io.micronaut.data.annotation.MappedEntity;
 import io.micronaut.data.annotation.MappedProperty;
 import lombok.*;
 
+import java.util.UUID;
+
 /**
  * @author Jan Boonen
  */
@@ -17,6 +19,9 @@ import lombok.*;
 public class AccountEntity {
 
     @Id
+    @Getter
+    private UUID id;
+
     @Getter
     private String username;
 

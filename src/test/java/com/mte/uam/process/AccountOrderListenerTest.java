@@ -10,8 +10,9 @@ import io.micronaut.test.annotation.MockBean;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
 import jakarta.inject.Inject;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
+import org.mockito.ArgumentCaptor;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -22,14 +23,12 @@ class AccountOrderListenerTest {
     @Inject
     private AccountService accountService;
 
-    @InjectMocks
-    private AccountOrderListener accountOrderListener;
-
     @Inject
     private AccountOrderRepository accountOrderRepository;
 
     @Test
     void shouldReturnAccountAfterAccountOrderPersist() {
+        var accountArgumentCaptor = ArgumentCaptor.forClass(Account.class);
         var accountOrderEntity = AccountOrderEntity.builder()
                 .username("test")
                 .firstName("First Name")
@@ -37,9 +36,11 @@ class AccountOrderListenerTest {
                 .build();
         accountOrderRepository.save(accountOrderEntity);
 
-        var account = Account.create("First Name", "Last Name", "test");
-
-        verify(accountService).create(account);
+        verify(accountService).create(accountArgumentCaptor.capture());
+        var result = accountArgumentCaptor.getValue();
+        assertThat(result.getUsername()).isEqualTo("test");
+        assertThat(result.getFirstName()).isEqualTo("First Name");
+        assertThat(result.getLastName()).isEqualTo("Last Name");
     }
 
     @MockBean(AccountService.class)
