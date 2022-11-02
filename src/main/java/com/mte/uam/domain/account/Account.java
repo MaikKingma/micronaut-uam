@@ -2,6 +2,8 @@ package com.mte.uam.domain.account;
 
 import lombok.*;
 
+import java.util.UUID;
+
 /**
  * @author Jan Boonen
  */
@@ -10,6 +12,9 @@ import lombok.*;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @EqualsAndHashCode
 public class Account {
+
+    @Getter
+    private String accountId;
 
     @Getter
     private String firstName;
@@ -21,6 +26,6 @@ public class Account {
     private String username;
 
     public static Account create(String firstName, String lastName, String username) {
-        return new Account(firstName, lastName, username);
+        return new Account(UUID.randomUUID().toString(), firstName, lastName, username);
     }
 }
