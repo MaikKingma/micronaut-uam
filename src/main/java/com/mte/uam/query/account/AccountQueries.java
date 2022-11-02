@@ -2,7 +2,6 @@ package com.mte.uam.query.account;
 
 import com.mte.uam.data.account.AccountEntity;
 import com.mte.uam.domain.account.AccountService;
-import io.micronaut.http.HttpResponse;
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
