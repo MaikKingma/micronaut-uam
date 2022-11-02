@@ -17,8 +17,19 @@ public class AccountOrderServiceImpl implements AccountOrderService {
         this.accountOrderRepository = accountOrderRepository;
     }
 
-    @Override
-    public void register(AccountOrder order) {
+    public void save(AccountOrder order) {
         accountOrderRepository.save(AccountOrderMapper.INSTANCE.accountOrderToAccountOrderEntity(order));
+    }
+
+    @Override
+    public AccountOrder findById(String username) {
+        return AccountOrderMapper.INSTANCE.accountOrderEntityToAccountOrder(
+                accountOrderRepository.findById(username)
+                        .orElseThrow(() -> new AccountOrderNotFoundException("order not found")));
+    }
+
+    @Override
+    public void update(AccountOrder accountOrder) {
+        accountOrderRepository.update(AccountOrderMapper.INSTANCE.accountOrderToAccountOrderEntity(accountOrder));
     }
 }

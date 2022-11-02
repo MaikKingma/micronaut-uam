@@ -21,11 +21,11 @@ import javax.validation.constraints.NotBlank;
  */
 @Slf4j
 @Controller("/accounts")
-public class AccountCommands {
+public class AccountOrderCommands {
 
     private final AccountOrderService accountOrderService;
 
-    public AccountCommands(AccountOrderService accountOrderService) {
+    public AccountOrderCommands(AccountOrderService accountOrderService) {
         this.accountOrderService = accountOrderService;
     }
 
@@ -35,7 +35,7 @@ public class AccountCommands {
     public void registerAccount(@Body RegisterAccountDTO registerAccountDTO) {
         log.info("creating account order from DTO");
         AccountOrder accountOrder = AccountOrder.create(registerAccountDTO.firstName, registerAccountDTO.lastName, registerAccountDTO.username);
-        accountOrderService.register(accountOrder);
+        accountOrderService.save(accountOrder);
     }
 
     @Introspected

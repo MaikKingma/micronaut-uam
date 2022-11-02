@@ -23,7 +23,7 @@ import static org.mockito.Mockito.verify;
 
 @MicronautTest(transactional = false)
 @Requires(property = "mockito.test.enabled", defaultValue = StringUtils.FALSE, value = StringUtils.TRUE)
-class AccountCommandsTest {
+class AccountOrderCommandsTest {
 
     @Inject
     AccountOrderService accountOrderService;
@@ -38,11 +38,11 @@ class AccountCommandsTest {
                 AccountOrder.builder().username("username").firstName("first").lastName("last").build();
 
         HttpResponse<Object> response = httpClient.toBlocking().exchange(HttpRequest.POST("/accounts/register",
-                new AccountCommands.RegisterAccountDTO(
+                new AccountOrderCommands.RegisterAccountDTO(
                 "username", "first", "last")));
 
         assertEquals(response.getStatus(), HttpStatus.ACCEPTED);
-        verify(accountOrderService, times(1)).register(any(AccountOrder.class));
+        verify(accountOrderService, times(1)).save(any(AccountOrder.class));
 
     }
 

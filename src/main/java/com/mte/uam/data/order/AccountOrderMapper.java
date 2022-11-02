@@ -14,4 +14,7 @@ public interface AccountOrderMapper {
     AccountOrderMapper INSTANCE = Mappers.getMapper(AccountOrderMapper.class);
 
     AccountOrderEntity accountOrderToAccountOrderEntity(AccountOrder accountOrder);
+
+    AccountOrder accountOrderEntityToAccountOrder(AccountOrderEntity accountOrderEntity);
+
 }

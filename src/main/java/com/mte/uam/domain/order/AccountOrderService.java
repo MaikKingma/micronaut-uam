@@ -5,5 +5,15 @@ package com.mte.uam.domain.order;
  */
 
 public interface AccountOrderService {
-    void register(AccountOrder order);
+    void save(AccountOrder order);
+
+    AccountOrder findById(String username);
+
+    void update(AccountOrder accountOrder);
+
+    class AccountOrderNotFoundException  extends RuntimeException{
+        public AccountOrderNotFoundException(String errorMessage) {
+            super(errorMessage);
+        }
+    }
 }

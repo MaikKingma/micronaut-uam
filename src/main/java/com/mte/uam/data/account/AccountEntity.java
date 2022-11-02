@@ -1,31 +1,31 @@
-package com.mte.uam.data.order;
+package com.mte.uam.data.account;
 
 import io.micronaut.data.annotation.Id;
 import io.micronaut.data.annotation.MappedEntity;
 import io.micronaut.data.annotation.MappedProperty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 /**
- * @author Maik Kingma
+ * @author Jan Boonen
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@MappedEntity(value = "account_order")
-public class AccountOrderEntity {
+@MappedEntity(value = "account")
+@EqualsAndHashCode
+public class AccountEntity {
 
     @Id
+    @Getter
     private String username;
 
+    @Getter
     @MappedProperty(value = "firstname")
     private String firstName;
 
+    @Getter
     @MappedProperty(value = "lastname")
     private String lastName;
 
-    private boolean finalized;
 }
