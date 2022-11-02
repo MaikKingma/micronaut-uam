@@ -14,5 +14,4 @@ import java.util.UUID;
 
 @JdbcRepository(dialect = Dialect.POSTGRES)
 public interface AccountRepository extends CrudRepository<AccountEntity, UUID> {
-    List<AccountEntity> findAll();
 }

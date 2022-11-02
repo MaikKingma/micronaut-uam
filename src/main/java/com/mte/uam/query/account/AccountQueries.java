@@ -20,19 +20,16 @@ public class AccountQueries {
     }
 
     @Get(produces = MediaType.APPLICATION_JSON)
-    public HttpResponse<List<AccountView>> getAccounts(){
+    public List<AccountView> getAccounts(){
 
         List<AccountEntity> accountEntities = accountService.findAll();
 
-        return HttpResponse.ok(
-                accountEntities.stream().map(
+        return accountEntities.stream().map(
                         ae -> new AccountView(
                                 ae.getFirstName(),
                                 ae.getLastName(),
                                 ae.getUsername()))
-                        .collect(Collectors.toList())
-        );
-
+                        .collect(Collectors.toList());
     }
 
 }

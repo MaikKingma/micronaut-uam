@@ -6,6 +6,8 @@ import jakarta.inject.Singleton;
 import lombok.AllArgsConstructor;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Singleton
 @AllArgsConstructor
@@ -19,6 +21,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     public List<AccountEntity> findAll() {
-        return accountRepository.findAll();
+        return StreamSupport.stream(accountRepository.findAll().spliterator(), false)
+                .collect(Collectors.toList());
     }
 }
