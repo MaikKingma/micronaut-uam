@@ -31,4 +31,11 @@ public class AccountQueries {
                         .collect(Collectors.toList());
     }
 
+    @Get(uri = "/{username}/keycloak-user", produces = MediaType.APPLICATION_JSON)
+    public KeycloakUserView getAccount(String username) {
+        AccountEntity account = accountService.findByName(username);
+
+        return new KeycloakUserView(account.getId(), account.getFirstName(), account.getLastName(), account.getUsername());
+    }
+
 }

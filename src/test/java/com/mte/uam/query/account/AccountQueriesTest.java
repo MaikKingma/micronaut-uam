@@ -13,9 +13,11 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -60,6 +62,37 @@ class AccountQueriesTest {
         assertThat(body.get()).usingRecursiveFieldByFieldElementComparator()
                 .containsExactlyInAnyOrder(expected);
 
+    }
+
+    @Test
+    void shouldGetKeycloakUserByUsername() {
+        UUID accountId = UUID.randomUUID();
+
+        AccountEntity accountEntity = AccountEntity.builder()
+                .id(accountId)
+                .firstName("TestFirst")
+                .lastName("TestLast")
+                .username("Test@test.test")
+                .build();
+
+        KeycloakUserView expected = new KeycloakUserView(
+                accountEntity.getId(),
+                accountEntity.getFirstName(),
+                accountEntity.getLastName(),
+                accountEntity.getUsername()
+        );
+
+        when(accountService.findByName(accountEntity.getUsername())).thenReturn(accountEntity);
+
+        var request = HttpRequest.GET("/accounts/" + accountEntity.getUsername() + "/keycloak-user");
+        var response = client.toBlocking().exchange(request, KeycloakUserView.class);
+
+        assertEquals(response.getStatus(), HttpStatus.OK);
+        assertNotNull(response.body());
+        assertEquals(expected.accountId(), response.body().accountId());
+        assertEquals(expected.firstName(), response.body().firstName());
+        assertEquals(expected.lastName(), response.body().lastName());
+        assertEquals(expected.username(), response.body().username());
     }
 
 }
