@@ -1,11 +1,14 @@
 package com.mte.uam.query.account;
 
+import com.mte.uam.data.account.AccountEntity;
 import com.mte.uam.domain.account.AccountService;
 import io.micronaut.http.HttpResponse;
-import io.micronaut.http.HttpStatus;
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller("/accounts")
 public class AccountQueries {
@@ -17,8 +20,19 @@ public class AccountQueries {
     }
 
     @Get(produces = MediaType.APPLICATION_JSON)
-    public HttpResponse<?> getAccounts() {
-        return HttpResponse.status(HttpStatus.OK).body(accountService.findAll());
+    public HttpResponse<List<AccountView>> getAccounts(){
+
+        List<AccountEntity> accountEntities = accountService.findAll();
+
+        return HttpResponse.ok(
+                accountEntities.stream().map(
+                        ae -> new AccountView(
+                                ae.getFirstName(),
+                                ae.getLastName(),
+                                ae.getUsername()))
+                        .collect(Collectors.toList())
+        );
+
     }
 
 }
