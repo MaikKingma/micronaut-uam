@@ -1,12 +1,14 @@
 package com.mte.uam.data.account;
 
 import com.mte.uam.domain.account.Account;
+import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
 import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@MicronautTest(transactional = false)
 public class AccountMapperTest {
 
     @Test

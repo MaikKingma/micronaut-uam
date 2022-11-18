@@ -9,6 +9,7 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.test.annotation.MockBean;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
 import jakarta.inject.Inject;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 
@@ -16,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-@MicronautTest
+@MicronautTest(transactional = false)
 @Requires(property = "mockito.test.enabled", defaultValue = StringUtils.FALSE, value = StringUtils.TRUE)
 class AccountOrderListenerTest {
 
@@ -25,6 +26,11 @@ class AccountOrderListenerTest {
 
     @Inject
     private AccountOrderRepository accountOrderRepository;
+
+    @BeforeEach
+    void beforeEach() {
+        accountOrderRepository.deleteAll();
+    }
 
     @Test
     void shouldReturnAccountAfterAccountOrderPersist() {

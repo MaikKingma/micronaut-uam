@@ -4,7 +4,6 @@ import com.mte.uam.data.order.AccountOrderServiceImpl;
 import com.mte.uam.domain.order.AccountOrder;
 import com.mte.uam.domain.order.AccountOrderService;
 import io.micronaut.context.annotation.Requires;
-import io.micronaut.core.util.StringUtils;
 import io.micronaut.http.HttpRequest;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.HttpStatus;
@@ -22,7 +21,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 @MicronautTest(transactional = false)
-@Requires(property = "mockito.test.enabled", defaultValue = StringUtils.FALSE, value = StringUtils.TRUE)
+@Requires(property = "mockito.test.enabled")
 class AccountOrderCommandsTest {
 
     @Inject
