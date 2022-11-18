@@ -1,9 +1,11 @@
 micronaut:
+  server:
+    port: 8081
   application:
     name: micronautUam
 datasources:
   default:
-    url: jdbc:postgresql://localhost:5432/micronaut-uam
+    url: jdbc:postgresql://localhost:5433/micronaut-uam
     username: micronaut-uam
     password: "micronaut-uam"
     driverClassName: org.postgresql.Driver
@@ -17,7 +19,3 @@ flyway:
   datasources:
     default:
       enabled: true
-
-mockito:
-  test:
-    enabled: true

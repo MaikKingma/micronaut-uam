@@ -1,8 +1,8 @@
-POST http://localhost:8080/accounts/register
+POST http://localhost:8081/accounts/register
 Content-Type: application/json
 
 {
   "firstName": "First",
   "lastName": "Last",
-  "username": "test1@test.test"
+  "username": "test@test.test"
 }

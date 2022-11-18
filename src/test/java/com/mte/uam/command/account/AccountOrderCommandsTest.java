@@ -34,16 +34,12 @@ class AccountOrderCommandsTest {
 
     @Test
     void shouldRegisterAccount() {
-        AccountOrder accountOrder =
-                AccountOrder.builder().username("username").firstName("first").lastName("last").build();
-
         HttpResponse<Object> response = httpClient.toBlocking().exchange(HttpRequest.POST("/accounts/register",
                 new AccountOrderCommands.RegisterAccountDTO(
                 "username", "first", "last")));
 
         assertEquals(response.getStatus(), HttpStatus.ACCEPTED);
         verify(accountOrderService, times(1)).save(any(AccountOrder.class));
-
     }
 
     @MockBean(AccountOrderServiceImpl.class)

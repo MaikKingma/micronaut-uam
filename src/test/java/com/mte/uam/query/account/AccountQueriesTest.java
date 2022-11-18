@@ -17,7 +17,6 @@ import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -38,61 +37,51 @@ class AccountQueriesTest {
 
     @Test
     void shouldGetAllAccounts() {
+        // given
         AccountEntity accountEntity = AccountEntity.builder()
                 .firstName("TestFirst")
                 .lastName("TestLast")
                 .username("Test@test.test")
                 .build();
-
         List<AccountEntity> accountEntities = new ArrayList<>();
         accountEntities.add(accountEntity);
-
-        AccountView expected = new AccountView(
+        AccountQueries.AccountView expected = new AccountQueries.AccountView(
                 accountEntity.getFirstName(),
                 accountEntity.getLastName(),
                 accountEntity.getUsername());
-
         when(accountService.findAll()).thenReturn(accountEntities);
-
+        // when
         var request = HttpRequest.GET("/accounts");
-        var response = client.toBlocking().exchange(request, AccountView[].class);
-        var body = response.getBody();
-
+        var response = client.toBlocking().exchange(request, AccountQueries.AccountView[].class);
+        // then
         assertEquals(response.getStatus(), HttpStatus.OK);
-        assertThat(body.get()).usingRecursiveFieldByFieldElementComparator()
-                .containsExactlyInAnyOrder(expected);
+        assertThat(response.getBody().get()).usingRecursiveFieldByFieldElementComparator().containsExactlyInAnyOrder(expected);
 
     }
 
     @Test
     void shouldGetKeycloakUserByUsername() {
+        // given
         UUID accountId = UUID.randomUUID();
-
         AccountEntity accountEntity = AccountEntity.builder()
                 .id(accountId)
                 .firstName("TestFirst")
                 .lastName("TestLast")
                 .username("Test@test.test")
                 .build();
-
-        KeycloakUserView expected = new KeycloakUserView(
+        AccountQueries.KeycloakUserView expected = new AccountQueries.KeycloakUserView(
                 accountEntity.getId(),
                 accountEntity.getFirstName(),
                 accountEntity.getLastName(),
                 accountEntity.getUsername()
         );
-
         when(accountService.findByName(accountEntity.getUsername())).thenReturn(accountEntity);
-
+        // when
         var request = HttpRequest.GET("/accounts/" + accountEntity.getUsername() + "/keycloak-user");
-        var response = client.toBlocking().exchange(request, KeycloakUserView.class);
-
+        var response = client.toBlocking().exchange(request, AccountQueries.KeycloakUserView.class);
+        // then
         assertEquals(response.getStatus(), HttpStatus.OK);
-        assertNotNull(response.body());
-        assertEquals(expected.accountId(), response.body().accountId());
-        assertEquals(expected.firstName(), response.body().firstName());
-        assertEquals(expected.lastName(), response.body().lastName());
-        assertEquals(expected.username(), response.body().username());
+        assertThat(response.getBody().get()).usingRecursiveComparison().isEqualTo(expected);
     }
 
 }
