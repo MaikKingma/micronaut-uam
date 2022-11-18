@@ -11,7 +11,7 @@ import org.mockito.InjectMocks;
 
 import static org.mockito.Mockito.mock;
 
-@MicronautTest
+@MicronautTest(transactional = false)
 @Requires(property = "mockito.test.enabled", defaultValue = StringUtils.FALSE, value = StringUtils.TRUE)
 class AccountListenerTest {
 
@@ -23,8 +23,6 @@ class AccountListenerTest {
 
     @Inject
     private AccountRepository accountRepository;
-
-
 
     @MockBean(AccountOrderService.class)
     AccountOrderService accountOrderService() {
