@@ -33,7 +33,6 @@ public class AccountOrderCommands {
     @Post(uri = "/register", consumes = MediaType.APPLICATION_JSON)
     @Status(HttpStatus.ACCEPTED)
     public void registerAccount(@Body RegisterAccountDTO registerAccountDTO) {
-        log.info("creating account order from DTO");
         AccountOrder accountOrder = AccountOrder.create(registerAccountDTO.firstName, registerAccountDTO.lastName, registerAccountDTO.username);
         accountOrderService.save(accountOrder);
     }

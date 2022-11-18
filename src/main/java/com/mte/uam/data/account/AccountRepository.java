@@ -12,4 +12,6 @@ import java.util.UUID;
 
 @JdbcRepository(dialect = Dialect.POSTGRES)
 public interface AccountRepository extends CrudRepository<AccountEntity, UUID> {
+
+    AccountEntity findByUsername(String username);
 }

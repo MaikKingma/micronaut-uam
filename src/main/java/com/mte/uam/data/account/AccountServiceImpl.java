@@ -24,4 +24,8 @@ public class AccountServiceImpl implements AccountService {
         return StreamSupport.stream(accountRepository.findAll().spliterator(), false)
                 .collect(Collectors.toList());
     }
+
+    public AccountEntity findByName(String username) {
+        return accountRepository.findByUsername(username);
+    }
 }

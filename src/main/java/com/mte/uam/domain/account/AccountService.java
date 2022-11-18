@@ -10,5 +10,6 @@ public interface AccountService {
 
     List<AccountEntity> findAll();
 
+    AccountEntity findByName(String username);
 
 }
